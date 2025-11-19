@@ -2,6 +2,7 @@ vim.lsp.enable({
   "lua_ls",                      -- lua
   "tinymist",                    -- typst
   "texlab",                      -- latex
+  "bashls",                      -- bash
   "r_language_server",           -- R
   -- "basedpyright",                -- python
   "pyrefly",                     --python

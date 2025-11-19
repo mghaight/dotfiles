@@ -1,6 +1,10 @@
 -- clear search highlighting
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- :terminal maps
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-N>")
+vim.keymap.set({ "n", "t" }, "<leader>tt", "<cmd>:Floaterminal<CR>")
+
 -- Emacs (readline) keybindings to move in insert mode
 vim.keymap.set("i", "<C-n>", "<Down>")
 vim.keymap.set("i", "<C-p>", "<Up>")
