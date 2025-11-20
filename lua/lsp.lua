@@ -13,7 +13,7 @@ vim.lsp.enable({
 
 vim.lsp.config("tinymist", {
   settings = {
-    formatterMode = "typstyle",
+    formatterMode = "typstfmt",
   },
 })
 
