@@ -1,14 +1,23 @@
-set drawbox
+set hidden    # show hidden files
+set drawbox   # draw a border
+set dircounts # include num of itms inside dir
+set icons     # icons!!
+set mouse     # bad, i know
 
-cmd tmuxedit ${{
-  tmux new-window "nvim \"$fx\""
+# no username and hostname in the prompt
+set promptfmt "\033[34;1m%d\033[0m\033[1m%f\033[0m"
+
+# no underline in preview dir
+set cursorpreviewfmt ""
+
+# edit in tmux!
+cmd tmux_edit ${{
+  if [ -n "$TMUX" ]; then
+    tmux new-window "nvim \"$fx\""
+  else
+    nvim "$fx"
+  fi
 }}
 
-map e tmuxedit
-
-cmd open_in_new_tmux_window %{{
-  tmux new-window -c "$selected_path"
-}}
-
-map W open_in_new_tmux_window
+map e tmux_edit
 
