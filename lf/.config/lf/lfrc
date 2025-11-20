@@ -13,9 +13,9 @@ set cursorpreviewfmt ""
 # edit in tmux!
 cmd tmux_edit ${{
   if [ -n "$TMUX" ]; then
-    tmux new-window "nvim \"$fx\""
+    tmux new-window "nvim $fx"
   else
-    nvim "$fx"
+    nvim $fx
   fi
 }}
 
