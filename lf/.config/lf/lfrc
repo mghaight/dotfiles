@@ -1,0 +1,14 @@
+set drawbox
+
+cmd tmuxedit ${{
+  tmux new-window "nvim \"$fx\""
+}}
+
+map e tmuxedit
+
+cmd open_in_new_tmux_window %{{
+  tmux new-window -c "$selected_path"
+}}
+
+map W open_in_new_tmux_window
+
