@@ -35,12 +35,8 @@ setopt CORRECT
 setopt dot_glob
 setopt extended_glob
 
-# export variables
+# prompt 
 export PROMPT="%2~ $ "
-export EDITOR="nvim"
-export PATH="/Users/mgh/.local/bin:$PATH"
-export PATH="$HOME/.config/emacs/bin:$PATH"
-export PATH="$HOME/scripts:$PATH"
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -55,5 +51,3 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 # End of lines added by compinstall
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
