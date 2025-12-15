@@ -1,4 +1,5 @@
 vim.pack.add {
+  { src = "https://github.com/pappasam/papercolor-theme-slim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/chomosuke/typst-preview.nvim" },
