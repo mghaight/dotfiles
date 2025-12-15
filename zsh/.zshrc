@@ -16,8 +16,6 @@ alias news="newsboat"
 
 alias brewall="brew update && brew upgrade && brew upgrade --fetch-HEAD neovim && brew upgrade --cask --greedy && brew cleanup --prune=all"
 
-alias todo="tmux rename-window 'todo' && vim ~/wiki/todo.md && tmux set-window-option automatic-rename on"
-
 alias cat="bat --plain"
 alias icat="kitten icat"
 
@@ -25,6 +23,10 @@ alias R="R --no-save --no-restore-data"
 
 alias :q="exit"
 alias :wq="exit"
+
+
+get() { fd -1 "$@" | tee /dev/tty | xargs -r open; }
+
 
 autoload -z edit-command-line
 zle -N edit-command-line

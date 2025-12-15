@@ -27,7 +27,7 @@ require("blink.cmp").setup({
 })
 
 require("typst-preview").setup({
-  invert_colors = "auto",
+  -- invert_colors = "auto",
 })
 
 require 'nvim-treesitter.configs'.setup {

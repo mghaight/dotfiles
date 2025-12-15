@@ -18,6 +18,11 @@ cmd tmux_edit ${{
     kitty @ launch --type=tab --cwd="$PWD" zsh -lc 'nvim "$@"' -- $fx
   fi
 }}
-
 map e tmux_edit
 
+cmd mkdir %{{
+    printf "Make directory: "
+    read ans
+    mkdir $ans
+}}
+map md mkdir
