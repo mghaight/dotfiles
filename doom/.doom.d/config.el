@@ -1,14 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
-;; (setq user-full-name "John Doe"
-;;       user-mail-address "john@doe.com")
-
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
@@ -18,30 +9,69 @@
 ;; - `doom-symbol-font' -- for symbols
 ;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-font (font-spec :family "JuliaMono" :size 14 :weight 'light)
+      doom-variable-pitch-font (font-spec :family "Gentium" :size 14))
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq doom-theme 'modus-operandi)
+
+(setq +tree-sitter-hl-enabled-modes t)
+
+
+(after! ess-r-mode
+  (defun mgh/r-docs ()
+    (interactive)
+    (if (one-window-p t)
+        (let ((origin (selected-window)))
+          (call-interactively #'+lookup/documentation)
+          (when-let ((buf (get-buffer "*lsp-help*")))
+            (delete-windows-on buf)
+            (select-window origin)
+            (display-buffer-in-direction
+             buf
+             '((direction . right)
+               (window-width . 0.5)
+               (inhibit-same-window . t)))
+            (select-window origin)))
+      (call-interactively #'+lookup/documentation)))
+
+  (map! :map ess-r-mode-map :n "K" #'mgh/r-docs))
+
+
+
+;; tinymist + lsp-mode for typst-ts-mode
+(after! lsp-mode
+  ;; Make sure lsp-mode knows what language Typst buffers are
+  (add-to-list 'lsp-language-id-configuration '(typst-ts-mode . "typst"))
+  (add-to-list 'lsp-language-id-configuration '("\\.typ\\'" . "typst"))
+
+  ;; Register the server
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("tinymist"))
+    :major-modes '(typst-ts-mode)
+    :server-id 'tinymist))
+
+  ;; Start LSP automatically in Typst buffers
+  (add-hook 'typst-ts-mode-hook #'lsp-deferred))
+
+
+(setq display-line-numbers-type `relative)
+
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/wiki/")
 
+(after! evil-org
+  (map! :map evil-org-mode-map
+        :nv "gj" #'evil-next-visual-line
+        :nv "gk" #'evil-previous-visual-line
+        :nv "<down>" #'evil-next-visual-line
+        :nv "<up>" #'evil-previous-visual-line))
+
+(setq +latex-viewers '(pdf-tools))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.

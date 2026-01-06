@@ -4,8 +4,7 @@ vim.lsp.enable({
   "texlab",                      -- latex
   "bashls",                      -- bash
   "r_language_server",           -- R
-  -- "basedpyright",                -- python
-  "pyrefly",                     --python
+  "basedpyright",                -- python
   "vscode-html-language-server", -- html
   "html",                        -- html
   "rust_analyzer",               -- rust
