@@ -1,3 +1,12 @@
+-- uhhh
+vim.opt.wildmode = "noselect"
+vim.api.nvim_create_autocmd("CmdlineChanged", {
+  pattern = ":",
+  callback = function()
+    vim.fn.wildtrigger()
+  end
+})
+
 -- go to last line visited
 vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function()

@@ -7,3 +7,6 @@
 (package! typst-ts-mode)
 
 (package! pandoc-mode)
+
+(package! ess-plot
+  :recipe (:host github :repo "DennieTeMolder/ess-plot"))

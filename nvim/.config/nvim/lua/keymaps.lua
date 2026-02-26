@@ -65,8 +65,15 @@ vim.keymap.set("n", "<leader>dn", function()
   vim.diagnostic.jump({ count = 1, float = true })
 end)
 
-
 -- jump to prev diagnostic
 vim.keymap.set("n", "<leader>dp", function()
   vim.diagnostic.jump({ count = -1, float = true })
 end)
+
+
+-- buffer cycling
+vim.keymap.set("n", "<leader>bn", ":bn<CR>")
+vim.keymap.set("n", "<leader>b]", ":bn<CR>")
+
+vim.keymap.set("n", "<leader>bp", ":bp<CR>")
+vim.keymap.set("n", "<leader>b[", ":bp<CR>")
