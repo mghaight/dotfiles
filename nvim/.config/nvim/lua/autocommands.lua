@@ -7,6 +7,22 @@ vim.api.nvim_create_autocmd("CmdlineChanged", {
   end
 })
 
+-- Keep each tab rooted at the Git repository of its active file.
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = vim.api.nvim_create_augroup("git_root_cwd", { clear = true }),
+  desc = "Set tab-local cwd to the current file's Git root",
+  callback = function(args)
+    if vim.bo[args.buf].buftype ~= "" then
+      return
+    end
+
+    local root = vim.fs.root(args.buf, ".git")
+    if root and vim.fs.normalize(vim.fn.getcwd(0)) ~= root then
+      vim.cmd.tcd(vim.fn.fnameescape(root))
+    end
+  end,
+})
+
 -- go to last line visited
 vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function()

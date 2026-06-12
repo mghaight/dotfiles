@@ -58,3 +58,9 @@ require("telescope").setup({
 })
 
 require("oil").setup()
+
+require("sidekick").setup({
+  cli = {
+    picker = "telescope",
+  },
+})

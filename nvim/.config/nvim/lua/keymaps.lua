@@ -50,6 +50,24 @@ vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc
 vim.keymap.set("n", "<leader>r", ":RepluaOpen<CR>")
 vim.keymap.set("n", "-", ":Oil .<CR>")
 
+-- sidekick maps
+vim.keymap.set({ "n", "t", "i", "x" }, "<C-.>", function()
+  require("sidekick.cli").focus({ name = "codex" })
+end, { desc = "Focus Codex" })
+vim.keymap.set("n", "<leader>ai", function()
+  require("sidekick.cli").toggle({ name = "codex", focus = true })
+end, { desc = "Toggle Codex" })
+vim.keymap.set({ "n", "x" }, "<leader>at", function()
+  require("sidekick.cli").send({ name = "codex", msg = "{this}" })
+end, { desc = "Send this to Codex" })
+vim.keymap.set({ "n", "x" }, "<leader>ap", function()
+  require("sidekick.cli").prompt(function(_, text)
+    if text then
+      require("sidekick.cli").send({ name = "codex", text = text })
+    end
+  end)
+end, { desc = "Select Codex prompt" })
+
 -- lsp keymaps
 vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float) -- use <leader>ld to open diagnostic popup
 vim.keymap.set("n", "<leader>lq", vim.lsp.buf.hover)         -- use <leader>lq to lookup symbol under cursor
