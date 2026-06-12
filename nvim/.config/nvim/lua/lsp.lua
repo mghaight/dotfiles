@@ -8,6 +8,7 @@ vim.lsp.enable({
   "vscode-html-language-server", -- html
   "html",                        -- html
   "rust_analyzer",               -- rust
+  "copilot",                     -- LLM
 })
 
 vim.lsp.config("tinymist", {
